@@ -1,0 +1,32 @@
+emplate:
+name: Deploy FE to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Deploy to EC2 via SSH
+        id: deploy
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            set -e
+            echo "Connecting to EC2..." 
+            cd /home/ubuntu/myportfolio/
+            git pull origin main 
+            npm i
+            npm run build
+            pm2 restart PROCESS_NAME || pm2 start "npm run start" --name myportfolio
+            pm2 save
