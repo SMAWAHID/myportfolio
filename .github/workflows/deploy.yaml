@@ -28,5 +28,5 @@ jobs:
             git pull origin main 
             npm i
             npm run build
-            pm2 restart myportfolio || pm2 start "npm run start" --name myportfolio
+            pm2 restart myportfolio || pm2 start "yarn start" --name myportfolio
             pm2 save
