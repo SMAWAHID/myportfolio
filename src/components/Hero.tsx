@@ -13,7 +13,7 @@ export default function Hero() {
             className="min-h-screen flex items-center justify-center pt-28 pb-20 relative overflow-hidden"
         >
             {/* Clean, subtle background */}
-            <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-blue-50/50 via-transparent to-transparent opacity-60 dark:from-blue-900/10 dark:opacity-40"></div>
+            {/* <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-blue-50/50 via-transparent to-transparent opacity-60 dark:from-blue-900/10 dark:opacity-40"></div> */}
 
             <div className="container mx-auto px-6 flex flex-col items-center text-center">
                 <motion.div

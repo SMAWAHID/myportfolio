@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google"; // Using Inter as a professional, clean font
 import "./globals.css";
+import BackgroundAnimation from "@/components/BackgroundAnimation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <BackgroundAnimation />
+        {children}
+      </body>
     </html>
   );
 }
