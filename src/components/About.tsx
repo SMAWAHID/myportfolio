@@ -23,16 +23,16 @@ export default function About() {
     };
 
     return (
-        <section id="about" className="py-20 bg-gray-50 dark:bg-gray-900">
+        <section id="about" className="py-24 bg-slate-50 dark:bg-slate-900/50">
             <div className="container mx-auto px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="max-w-3xl mx-auto mb-16 text-center"
                 >
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4">About Me</h2>
-                    <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-6 text-slate-900 dark:text-white tracking-tight">About Me</h2>
+                    <div className="w-16 h-1 bg-blue-600 mx-auto rounded-full opacity-80"></div>
                 </motion.div>
 
                 <motion.div
@@ -40,40 +40,44 @@ export default function About() {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
-                    className="grid grid-cols-1 md:grid-cols-2 gap-12"
+                    className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-20"
                 >
                     {/* Education */}
-                    <motion.div variants={itemVariants} className="space-y-6">
-                        <h3 className="text-2xl font-bold flex items-center gap-2">
-                            <Book className="text-blue-600" /> Education
+                    <motion.div variants={itemVariants} className="space-y-8">
+                        <h3 className="text-2xl font-semibold flex items-center gap-3 text-slate-800 dark:text-slate-100">
+                            <div className="p-2 rounded-lg bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400">
+                                <Book size={24} />
+                            </div>
+                            Education
                         </h3>
-                        <div className="space-y-4">
+                        <div className="space-y-6 pl-4 border-l-2 border-slate-200 dark:border-slate-800 ml-5">
                             {education.map((edu, index) => (
-                                <div
-                                    key={index}
-                                    className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow"
-                                >
-                                    <h4 className="text-xl font-semibold">{edu.institution}</h4>
-                                    <p className="text-blue-600 font-medium">{edu.degree}</p>
-                                    <p className="text-gray-500 text-sm mt-1">{edu.year}</p>
+                                <div key={index} className="pl-6 relative">
+                                    <div className="absolute -left-[29px] top-1 w-4 h-4 rounded-full bg-white border-4 border-blue-600 dark:border-blue-500 box-content"></div>
+                                    <h4 className="text-xl font-medium text-slate-900 dark:text-white">{edu.institution}</h4>
+                                    <p className="text-blue-600 dark:text-blue-400 font-medium mt-1">{edu.degree}</p>
+                                    <p className="text-slate-500 text-sm mt-1 font-mono">{edu.year}</p>
                                 </div>
                             ))}
                         </div>
                     </motion.div>
 
                     {/* Extracurricular */}
-                    <motion.div variants={itemVariants} className="space-y-6">
-                        <h3 className="text-2xl font-bold flex items-center gap-2">
-                            <Award className="text-blue-600" /> Extracurricular & Volunteer
+                    <motion.div variants={itemVariants} className="space-y-8">
+                        <h3 className="text-2xl font-semibold flex items-center gap-3 text-slate-800 dark:text-slate-100">
+                            <div className="p-2 rounded-lg bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400">
+                                <Award size={24} />
+                            </div>
+                            Experience & Volunteer
                         </h3>
                         <div className="space-y-4">
                             {extracurricular.map((extra, index) => (
                                 <div
                                     key={index}
-                                    className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow"
+                                    className="group bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border border-slate-100 dark:border-slate-700/50"
                                 >
-                                    <h4 className="text-xl font-semibold">{extra.organization}</h4>
-                                    <p className="text-gray-600 dark:text-gray-300">{extra.role}</p>
+                                    <h4 className="text-lg font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">{extra.organization}</h4>
+                                    <p className="text-slate-600 dark:text-slate-400 mt-2">{extra.role}</p>
                                 </div>
                             ))}
                         </div>
@@ -85,120 +89,40 @@ export default function About() {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
-                    className="mt-20"
                 >
-                    <h3 className="text-2xl font-bold flex items-center gap-2 mb-8 justify-center">
-                        <Code className="text-blue-600" /> Technical Expertise
-                    </h3>
+                    <h3 className="text-2xl font-semibold text-center mb-12 text-slate-900 dark:text-white">Technical Expertise</h3>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {/* Languages */}
-                        <motion.div variants={itemVariants} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg text-blue-600 dark:text-blue-400">
-                                    <Code size={20} />
-                                </div>
-                                <h4 className="text-lg font-bold">Languages</h4>
-                            </div>
-                            <div className="flex flex-wrap gap-2">
-                                {skills.languages.map(skill => (
-                                    <span key={skill} className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium">
-                                        {skill}
-                                    </span>
-                                ))}
-                            </div>
-                        </motion.div>
-
-                        {/* Frameworks */}
-                        <motion.div variants={itemVariants} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-lg text-green-600 dark:text-green-400">
-                                    <Globe size={20} />
-                                </div>
-                                <h4 className="text-lg font-bold">Frameworks</h4>
-                            </div>
-                            <div className="flex flex-wrap gap-2">
-                                {skills.frameworks.map(skill => (
-                                    <span key={skill} className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium">
-                                        {skill}
-                                    </span>
-                                ))}
-                            </div>
-                        </motion.div>
-
-                        {/* Tools */}
-                        <motion.div variants={itemVariants} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg text-purple-600 dark:text-purple-400">
-                                    <Wrench size={20} />
-                                </div>
-                                <h4 className="text-lg font-bold">Tools</h4>
-                            </div>
-                            <div className="flex flex-wrap gap-2">
-                                {skills.tools.map(skill => (
-                                    <span key={skill} className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium">
-                                        {skill}
-                                    </span>
-                                ))}
-                            </div>
-                        </motion.div>
-
-                        {/* Technical Concepts */}
-                        <motion.div variants={itemVariants} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg text-orange-600 dark:text-orange-400">
-                                    <Brain size={20} />
-                                </div>
-                                <h4 className="text-lg font-bold">Technical Concepts</h4>
-                            </div>
-                            <div className="flex flex-wrap gap-2">
-                                {skills.concepts.map(skill => (
-                                    <span key={skill} className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium">
-                                        {skill}
-                                    </span>
-                                ))}
-                            </div>
-                        </motion.div>
-
-                        {/* Soft Skills */}
-                        <motion.div variants={itemVariants} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="p-3 bg-pink-100 dark:bg-pink-900/30 rounded-lg text-pink-600 dark:text-pink-400">
-                                    <Users size={20} />
-                                </div>
-                                <h4 className="text-lg font-bold">Soft Skills</h4>
-                            </div>
-                            <div className="flex flex-wrap gap-2">
-                                {skills.softSkills.map(skill => (
-                                    <span key={skill} className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium">
-                                        {skill}
-                                    </span>
-                                ))}
-                            </div>
-                        </motion.div>
-
-                        {/* Spoken Languages */}
-                        <motion.div variants={itemVariants} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="p-3 bg-teal-100 dark:bg-teal-900/30 rounded-lg text-teal-600 dark:text-teal-400">
-                                    <Briefcase size={20} />
-                                </div>
-                                <h4 className="text-lg font-bold">Languages</h4>
-                            </div>
-                            <div className="flex flex-wrap gap-2">
-                                {skills.spokenLanguages.map(skill => (
-                                    <span key={skill} className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium">
-                                        {skill}
-                                    </span>
-                                ))}
-                            </div>
-                        </motion.div>
-
-
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {/* Skill Cards - unified design */}
+                        <SkillCard title="Languages" icon={Code} skills={skills.languages} />
+                        <SkillCard title="Frameworks" icon={Globe} skills={skills.frameworks} />
+                        <SkillCard title="Tools" icon={Wrench} skills={skills.tools} />
+                        <SkillCard title="Concepts" icon={Brain} skills={skills.concepts} />
+                        <SkillCard title="Soft Skills" icon={Users} skills={skills.softSkills} />
+                        <SkillCard title="Spoken Languages" icon={Briefcase} skills={skills.spokenLanguages} />
                     </div>
-
                 </motion.div>
             </div>
         </section>
+    );
+}
+
+function SkillCard({ title, icon: Icon, skills }: { title: string, icon: any, skills: string[] }) {
+    return (
+        <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700/50 hover:shadow-md hover:border-blue-100 dark:hover:border-blue-900/50 transition-all duration-300 group">
+            <div className="flex items-center gap-3 mb-6">
+                <div className="p-2.5 bg-slate-50 dark:bg-slate-700 rounded-xl text-slate-600 dark:text-slate-300 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                    <Icon size={20} />
+                </div>
+                <h4 className="text-lg font-bold text-slate-800 dark:text-slate-100">{title}</h4>
+            </div>
+            <div className="flex flex-wrap gap-2">
+                {skills.map(skill => (
+                    <span key={skill} className="px-3 py-1 bg-slate-50 dark:bg-slate-700/50 text-slate-600 dark:text-slate-300 rounded-md text-sm font-medium border border-slate-100 dark:border-slate-700">
+                        {skill}
+                    </span>
+                ))}
+            </div>
+        </div>
     );
 }
