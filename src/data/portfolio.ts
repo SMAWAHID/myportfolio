@@ -3,7 +3,7 @@ import { Github, Linkedin, Mail, Phone } from 'lucide-react';
 export const portfolioData = {
     personalInfo: {
         name: 'Syed Mawahid Hussain',
-        tagline: 'Software Engineer / CS Student / Problem Solver',
+        tagline: 'DevOps Intern @ The Botss / CS Student @ FAST NUCES Karachi',
         intro: 'A passionate Computer Science student and aspiring Software Engineer with a knack for solving complex problems and building efficient solutions.',
         email: 'hafizmawahid2775@gmail.com',
         phone: '+923104999443',
@@ -13,16 +13,19 @@ export const portfolioData = {
                 url: 'https://www.linkedin.com/in/syed-mawahid-hussain-ab951b180/', // User didn't provide URL, using placeholder
                 icon: Linkedin,
             },
+
             {
                 name: 'GitHub',
                 url: 'https://github.com/SMAWAHID',
                 icon: Github,
             },
+
             {
                 name: 'Email',
                 url: 'mailto:hafizmawahid2775@gmail.com',
                 icon: Mail,
             },
+
             {
                 name: 'Phone',
                 url: 'tel:+923378289306',

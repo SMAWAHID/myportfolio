@@ -4,17 +4,20 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "Projects", href: "/projects" },
+    { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const pathname = usePathname();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -24,71 +27,55 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    const isActive = (path: string) => {
+        if (path === "/" && pathname !== "/") return false;
+        return pathname.startsWith(path);
+    };
+
     return (
         <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-                ? "bg-white/90 backdrop-blur-lg shadow-sm border-b border-gray-100 dark:bg-black/80 dark:border-gray-800"
-                : "bg-transparent"
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${scrolled
+                ? "bg-white/95 backdrop-blur-md border-gray-200 dark:bg-[#0b0c0e]/95 dark:border-gray-800"
+                : "bg-white border-gray-200 dark:bg-[#0b0c0e] dark:border-gray-800"
                 }`}
         >
-            <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-                <a href="#home" className="flex items-center gap-2 group">
-                    <div className="relative w-10 h-10 overflow-hidden rounded-lg">
-                        <Image
-                            src="/logo.png"
-                            alt="SMH Logo"
-                            fill
-                            className="object-cover transition-transform duration-300 group-hover:scale-110"
-                        />
-                    </div>
-                </a>
+            <div className="max-w-[1440px] mx-auto px-6 h-16 flex items-center justify-between">
+                {/* Left Side: Logo + Navigation */}
+                <div className="flex items-center gap-8 md:gap-12">
+                    {/* Logo */}
+                    <Link href="/" className="flex items-center gap-2 group shrink-0">
+                        <div className="relative w-8 h-8 overflow-hidden">
+                            <Image
+                                src="/logo.png"
+                                alt="SMH Logo"
+                                fill
+                                className="object-contain" // Changed to contain to respect logo shape
+                            />
+                        </div>
+                    </Link>
 
-                {/* Desktop Menu */}
-                <div className="hidden md:flex space-x-10">
-                    {navLinks.map((link) => (
-                        <a
-                            key={link.name}
-                            href={link.href}
-                            className="text-sm tracking-wide uppercase text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 font-medium transition-colors"
-                        >
-                            {link.name}
-                        </a>
-                    ))}
+                    {/* Desktop/Tablet Nav Links */}
+                    <div className="flex items-center">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.name}
+                                href={link.href}
+                                className={`text-[15px] font-medium tracking-wide transition-colors !no-underline mr-8 last:mr-0 ${isActive(link.href)
+                                        ? "text-blue-600 dark:text-blue-400"
+                                        : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+                                    }`}
+                            >
+                                {link.name}
+                            </Link>
+                        ))}
+                    </div>
                 </div>
 
-                {/* Mobile Menu Button */}
-                <button
-                    className="md:hidden text-gray-600 dark:text-gray-300 hover:text-blue-600 transition-colors"
-                    onClick={() => setIsOpen(!isOpen)}
-                >
-                    {isOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
+                {/* Right Side: Simple CTA or Empty for now (Google style often has search/profile here) */}
+                <div className="hidden md:flex items-center gap-4">
+                    {/* Placeholder for future actions like Layout Toggle or Search */}
+                </div>
             </div>
-
-            {/* Mobile Menu */}
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-white/95 backdrop-blur-lg dark:bg-black/95 border-t border-gray-100 dark:border-gray-800"
-                    >
-                        <div className="flex flex-col space-y-4 px-8 py-8 items-center">
-                            {navLinks.map((link) => (
-                                <a
-                                    key={link.name}
-                                    href={link.href}
-                                    className="text-lg font-medium text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                                    onClick={() => setIsOpen(false)}
-                                >
-                                    {link.name}
-                                </a>
-                            ))}
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
         </nav>
     );
 }
