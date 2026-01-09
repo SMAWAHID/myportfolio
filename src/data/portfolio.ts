@@ -10,7 +10,7 @@ export const portfolioData = {
         socials: [
             {
                 name: 'LinkedIn',
-                url: 'https://linkedin.com/in/your-profile', // User didn't provide URL, using placeholder
+                url: 'https://www.linkedin.com/in/syed-mawahid-hussain-ab951b180/', // User didn't provide URL, using placeholder
                 icon: Linkedin,
             },
             {
@@ -25,7 +25,7 @@ export const portfolioData = {
             },
             {
                 name: 'Phone',
-                url: 'tel:+923104999443',
+                url: 'tel:+923378289306',
                 icon: Phone,
             },
         ],
@@ -55,7 +55,7 @@ export const portfolioData = {
         {
             institution: 'Generations School',
             degree: 'O Levels and A Levels',
-            year: '', // User didn't provide specific years
+            year: '2019-2024', // User didn't provide specific years
         },
     ],
     extracurricular: [
