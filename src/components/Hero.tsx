@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { portfolioData } from "@/data/portfolio";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function Hero() {
     const { name, tagline, intro, socials } = portfolioData.personalInfo;
@@ -22,7 +23,7 @@ export default function Hero() {
                     transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                     className="max-w-4xl"
                 >
-                    <h1 className="text-6xl md:text-8xl font-bold mb-8 tracking-tighter text-slate-900 dark:text-white">
+                    <h1 className="text-4xl md:text-8xl font-bold mb-8 tracking-tighter text-slate-900 dark:text-white">
                         {name}
                     </h1>
 
@@ -35,15 +36,15 @@ export default function Hero() {
                     </p>
 
                     <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-                        <a
-                            href="#projects"
+                        <Link
+                            href="/projects"
                             className="group relative px-8 py-4 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-medium overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
                         >
                             <span className="relative z-10 flex items-center gap-2">
                                 View Projects
                                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
                             </span>
-                        </a>
+                        </Link>
 
                         <div className="flex items-center gap-4">
                             {socials.map((social) => (

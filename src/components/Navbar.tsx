@@ -27,6 +27,8 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    const toggleMenu = () => setIsOpen(!isOpen);
+
     const isActive = (path: string) => {
         if (path === "/" && pathname !== "/") return false;
         return pathname.startsWith(path);
@@ -55,20 +57,29 @@ export default function Navbar() {
                     </Link>
 
                     {/* Desktop/Tablet Nav Links */}
-                    <div className="flex items-center">
+                    <div className="hidden md:flex items-center">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.name}
                                 href={link.href}
                                 className={`text-[15px] font-medium tracking-wide transition-colors !no-underline mr-8 last:mr-0 ${isActive(link.href)
-                                        ? "text-blue-600 dark:text-blue-400"
-                                        : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+                                    ? "text-blue-600 dark:text-blue-400"
+                                    : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
                                     }`}
                             >
                                 {link.name}
                             </Link>
                         ))}
                     </div>
+
+                    {/* Mobile Menu Button */}
+                    <button
+                        className="md:hidden p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
+                        onClick={toggleMenu}
+                        aria-label="Toggle menu"
+                    >
+                        {isOpen ? <X size={24} /> : <Menu size={24} />}
+                    </button>
                 </div>
 
                 {/* Right Side: Simple CTA or Empty for now (Google style often has search/profile here) */}
@@ -76,6 +87,34 @@ export default function Navbar() {
                     {/* Placeholder for future actions like Layout Toggle or Search */}
                 </div>
             </div>
+
+            {/* Mobile Menu Overlay */}
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="md:hidden bg-white dark:bg-[#0b0c0e] border-b border-gray-200 dark:border-gray-800 overflow-hidden"
+                    >
+                        <div className="flex flex-col px-6 py-4 space-y-4">
+                            {navLinks.map((link) => (
+                                <Link
+                                    key={link.name}
+                                    href={link.href}
+                                    className={`text-lg font-medium py-2 ${isActive(link.href)
+                                        ? "text-blue-600 dark:text-blue-400"
+                                        : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+                                        }`}
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    {link.name}
+                                </Link>
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </nav>
     );
 }
