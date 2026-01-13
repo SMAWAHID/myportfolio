@@ -1,0 +1,19 @@
+version: 0.0
+os: linux
+
+files:
+  - source: /
+    destination: /var/www/myportfolio
+
+hooks:
+  ApplicationStop:
+    - location: scripts/stop.sh
+      timeout: 300
+
+  ApplicationStart:
+    - location: scripts/start.sh
+      timeout: 300
+
+  ValidateService:
+    - location: scripts/validate.sh
+      timeout: 300
